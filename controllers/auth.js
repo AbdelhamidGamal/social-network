@@ -15,14 +15,14 @@ module.exports = {
   },
 
   async getUser(req, res) {
-    const user = await User.get(req.session.userId);
+    const user = await User.getById(req.session.userId);
     res.json(user);
   },
 
   async login(req, res) {
     await loginValidator(req.body);
 
-    const user = await User.findOne(req.body.email);
+    const user = await User.getByEmail(req.body.email);
 
     if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
       return res.status(400).json({ error: "something wrong happened" });

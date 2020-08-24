@@ -5,11 +5,11 @@ module.exports = {
     return new User(data).save();
   },
 
-  get(id) {
+  getById(id) {
     return User.findById(id).select("-password -__v -date");
   },
 
-  findOne(email) {
+  getByEmail(email) {
     return User.findOne({ email });
   }
 };

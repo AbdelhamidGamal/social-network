@@ -1,8 +1,6 @@
 const express = require("express");
 
-const asyncWrapper = require("../middlewares/errorHandlers/asyncWrapper");
-const requireLogin = require("../middlewares/requireLogin");
-const requireGuest = require("../middlewares/requireGuest");
+const { asyncWrapper, requireLogin, requireGuest } = require("../middlewares");
 
 const router = express.Router();
 
