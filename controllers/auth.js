@@ -25,12 +25,12 @@ module.exports = {
     const user = await User.getByEmail(req.body.email);
 
     if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-      return res.status(400).json({ error: "something wrong happened" });
+      return res.status(400).json({ error: "Invalid credentials" });
     }
 
     expressSession.login(req, user._id);
 
-    return res.json({ success: "You are loggedin" });
+    return res.json({ success: "You are logged in" });
   },
 
   async logout(req, res) {

@@ -9,7 +9,9 @@ const email = Joi.string()
   .email()
   .required();
 
-const password = Joi.string().min(8);
+const password = Joi.string()
+  .min(8)
+  .required();
 
 const registerSchema = Joi.object({
   name,
