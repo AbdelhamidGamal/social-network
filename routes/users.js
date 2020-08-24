@@ -1,6 +1,11 @@
 const express = require("express");
+
 const router = express.Router();
 
-router.get("/", (req, res) => res.json({ hi: "user route" }));
+// create user
+
+// update user
+
+// delete user
 
 module.exports = router;
