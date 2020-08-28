@@ -8,7 +8,11 @@ const {
   createOrEdit,
   getAll,
   getByid,
-  deleteProfile
+  deleteProfile,
+  addExperience,
+  deleteExperience,
+  addEducation,
+  deleteEducation
 } = require("../controllers/profile");
 
 // get logged in user profile info
@@ -25,5 +29,17 @@ router.get("/user/:id", asyncWrapper(getByid));
 
 // Delete profile, user, posts for logged in user
 router.delete("/", requireLogin, asyncWrapper(deleteProfile));
+
+// add user experince
+router.put("/experience", requireLogin, asyncWrapper(addExperience));
+
+// delete user experince
+router.delete("/experience/:id", requireLogin, asyncWrapper(deleteExperience));
+
+// add education
+router.put('/education', requireLogin, asyncWrapper(addEducation) )
+
+// delete education
+router.delete('/education/:id', requireLogin, asyncWrapper(deleteEducation) )
 
 module.exports = router;

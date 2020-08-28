@@ -35,7 +35,7 @@ module.exports = {
   async getAll(req, res) {
     const profiles = await Profile.find().populate("user", "name");
 
-    res.json({ profiles });
+    return res.json({ profiles });
   },
 
   async getByid(req, res) {
@@ -48,13 +48,53 @@ module.exports = {
       return res.status(400).json({ error: "Not Found" });
     }
 
-    res.json({ profile });
+    return res.json({ profile });
   },
 
   async deleteProfile(req, res) {
     await Profile.findOneAndDelete({ user: req.session.userId });
     await User.findByIdAndDelete(req.session.userId);
     logout(req);
-    res.send({ success: "Deleted" });
+    return res.send({ success: "Deleted" });
+  },
+
+  async addExperience(req, res) {
+    const profile = await Profile.findOne({ user: req.session.userId });
+    profile.experince.unshift(req.body);
+    await profile.save();
+
+    return res.json({ profile });
+  },
+
+  async deleteExperience(req, res) {
+    const profile = await Profile.findOne({ user: req.session.userId });
+
+    profile.experince = profile.experince.filter(
+      exp => exp._id.toString() !== req.params.id
+    );
+
+    await profile.save();
+
+    return res.json({ profile });
+  },
+
+  async addEducation(req,res){
+    const profile = await Profile.findOne({ user: req.session.userId });
+    profile.education.unshift(req.body);
+    await profile.save();
+
+    return res.json({ profile });
+  },
+
+  async deleteEducation(req,res){
+    const profile = await Profile.findOne({ user: req.session.userId });
+
+    profile.education = profile.education.filter(
+      exp => exp._id.toString() !== req.params.id
+    );
+
+    await profile.save();
+
+    return res.json({ profile });
   }
 };

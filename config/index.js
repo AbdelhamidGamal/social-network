@@ -3,5 +3,5 @@ module.exports = {
   mongoURI: process.env.MONGOURI || "mongodb://localhost/devcon",
   sessionSecret: process.env.SESSIONSECRET || "sdhasjkdhasdgasuydasd",
   redisSecret: process.env.REDISSECRET || "secret",
-  bcryptSaltRounds: 10
+  bcryptSaltRounds: 10,
 };
